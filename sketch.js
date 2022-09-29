@@ -41,5 +41,3 @@ function draw() {
     }
 
 }
-
-// Sample edit
