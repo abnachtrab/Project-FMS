@@ -1,0 +1,7 @@
+{
+  "name": "project-fms",
+  "version": "1.0.0",
+  "dependencies": {
+    "p5": "^1.4.2"
+  }
+}
