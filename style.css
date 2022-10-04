@@ -1,7 +1,14 @@
+@font-face {
+    font-family: 'TheFountainofWishes';
+    src: url('/fonts/TheFountainofWishes.ttf') format('truetype');
+}
+
 html, body {
     margin: 0;
     padding: 0;
-}
+    background-color: #767676;
+    font-family: 'TheFountainofWishes', serif;
+    }
 canvas {
     display: block;
 }

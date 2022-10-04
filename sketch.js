@@ -44,7 +44,8 @@ function setup() {
         transitioning = true
         gameState = "level select_"
     })
-    startButton.style("font-size", W/24 + "px")
+    startButton.style("font-size", W/16 + "px")
+    startButton.style("font-family", "TheFountainofWishes")
     // Create main menu button
     mainMenuButton = createButton("< Main Menu")
     mainMenuButton.size(W/6.5, H/16)
@@ -53,7 +54,8 @@ function setup() {
         transitioning = true
         gameState = "main menu_"
     })
-    mainMenuButton.style("font-size", W/48 + "px")
+    mainMenuButton.style("font-size", W/28 + "px")
+    mainMenuButton.style("font-family", "TheFountainofWishes")
     mainMenuButton.style("color", "orange")
     mainMenuButton.style("font-weight", "bold")
     mainMenuButton.style("background-color", "rgba(0, 0, 0, 0.4)")
