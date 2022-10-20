@@ -121,15 +121,29 @@ function setup() {
     for (let i = 0; i < levelCount; i++) {
         levelButtons[i] = createButton("Level " + (i+1))
         levelButtons[i].size(W/4, H/8)
-        levelButtons[i].position(W/2-W/8, H/2-H/8)
+        levelButtons[i].position(
+            W/2-(35*W/128) + (i%2)*(W/4+W/32),
+            H/2-H/5 + Math.floor(i/2)*H/6
+        )
         levelButtons[i].mousePressed(() => {
             transitioning = true
             gameState = "level " + (i+1) + "_"
         })
         levelButtons[i].style("font-size", W/16 + "px")
         levelButtons[i].style("font-family", "TheFountainofWishes")
+        if(i > 0) {
+            levelButtons[i].style("background-image", "url(images/lock.png)")
+            levelButtons[i].style("background-size", "50% 100%")
+            levelButtons[i].style("background-repeat", "no-repeat")
+            levelButtons[i].style("background-position", "center")
+            // Prevent clicking
+            levelButtons[i].mousePressed(() => {})
+            levelButtons[i].mouseOver(() => {})
+            levelButtons[i].mouseOut(() => {})
+            levelButtons[i].style("background-color", "rgba(0, 0, 0, 0.4)")
+            levelButtons[i].style("color", "rgba(255, 255, 255, 0.4)")
+        }
     }
-    console.log(levelButtons)
 }
 
 function draw() {
