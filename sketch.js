@@ -263,9 +263,12 @@ function keyPressed() {
         gameState = "main menu_"
     } else {
         ee+=key
-        if(ee.includes("bones")) {
+        if(ee.includes("bones") && !bones) {
             ee = ""
             bones = true
+        } else if((ee.includes("nobones") || ee.includes("no bones")) && bones) {
+            ee = ""
+            bones = false
         }
     }
 
