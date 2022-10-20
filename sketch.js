@@ -11,6 +11,9 @@ const transMult = 1
 
 // Current game state
 let gameState = "main menu"
+let ee = ""
+let bones = false
+let bonez
 
 // Transition variables
 let transitioning = false
@@ -135,6 +138,8 @@ function setup() {
             levelButtons[i].addClass("locked")
         }
     }
+    // Bonez
+    bonez = loadImage("images/what.gif")
 }
 
 function draw() {
@@ -245,8 +250,23 @@ function draw() {
             transTime += (deltaTime / (500 * transMult)) * transDir
         }
     }
+    if(bones)background(bonez)
 }
 
 function level1() {
+
+}
+
+function keyPressed() {
+    if(keyCode === 27) {
+        transitioning = true
+        gameState = "main menu_"
+    } else {
+        ee+=key
+        if(ee.includes("bones")) {
+            ee = ""
+            bones = true
+        }
+    }
 
 }
