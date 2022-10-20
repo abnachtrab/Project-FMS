@@ -14,6 +14,7 @@ let gameState = "main menu"
 let ee = ""
 let bones = false
 let bonez
+let drawnPos = []
 
 // Transition variables
 let transitioning = false
@@ -43,6 +44,8 @@ let levelButtons = []
 function setup() {
     // Create canvas
     createCanvas(W, H)
+    // Set framerate
+    frameRate(240)
     // Resize transition div
     document.getElementById("transition").style.width = (W + "px")
     document.getElementById("transition").style.height = (H + "px")
@@ -251,11 +254,19 @@ function draw() {
         }
     }
     if(bones)background(bonez)
+    function level1() {
+        background(backgroundGradient)
+        fill(0)
+        if(mouseIsPressed) {
+            drawnPos.push([mouseX, mouseY])
+        }
+        drawnPos.forEach((i) => {
+            circle(i[0],i[1],20)
+        })
+
+    }
 }
 
-function level1() {
-
-}
 
 function keyPressed() {
     if(keyCode === 27) {
@@ -271,5 +282,4 @@ function keyPressed() {
             bones = false
         }
     }
-
 }
