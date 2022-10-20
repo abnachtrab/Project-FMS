@@ -129,6 +129,7 @@ function setup() {
         levelButtons[i].style("font-size", W/16 + "px")
         levelButtons[i].style("font-family", "TheFountainofWishes")
     }
+    console.log(levelButtons)
 }
 
 function draw() {
@@ -139,6 +140,9 @@ function draw() {
         volumeSlider.hide()
         volumeSliderLabel.hide()
         volumeSliderCounter.hide()
+        for (let i = 0; i < levelCount; i++) {
+            levelButtons[i].hide()
+        }
         // Draw main menu
         background(backgroundGradient)
         title.html("Learn2Draw")
@@ -154,7 +158,7 @@ function draw() {
         background(backgroundDesign)
         title.html("Level Select")
         mainMenuButton.show()
-        for(let i=1;i<=levelCount;i++) {
+        for(let i=0;i<levelCount;i++) {
             levelButtons[i].show()
         }
     }
@@ -173,11 +177,11 @@ function draw() {
         // Update volume slider counter
         vol = volumeSlider.value()
         volumeSliderCounter.html(vol + "%")
-    } else {
+    } else if(/[0-9]+$/.test(gameState)){
         // Hide everything
         startButton.hide()
         optionsButton.hide()
-        for(let i=1;i<=levelCount;i++) {
+        for(let i=0;i<levelCount;i++) {
             levelButtons[i].hide()
         }
         // Draw level
@@ -221,4 +225,8 @@ function draw() {
             transTime += (deltaTime / (500 * transMult)) * transDir
         }
     }
+}
+
+function level1() {
+
 }
