@@ -33,6 +33,10 @@ let volumeSliderCounter
 let volumeSlider
 let vol = 100
 
+// Levels
+let levelCount = 8
+let levelButtons = []
+
 function setup() {
     // Create canvas
     createCanvas(W, H)
@@ -97,6 +101,7 @@ function setup() {
     volumeSlider = createSlider(0, 100, 50, 1)
     volumeSlider.size(W/5, H/16)
     volumeSlider.position(W/2-W/8, H/3)
+    volumeSlider.style("background-color", "rgba(0, 0, 0, 0.4)")
     // Create volume slider label
     volumeSliderLabel = createElement("h2", "Volume")
     volumeSliderLabel.size(W/4, H/16)
@@ -112,6 +117,18 @@ function setup() {
     volumeSliderCounter.style("font-size", W/32 + "px")
     volumeSliderCounter.style("font-family", "TheFountainofWishes")
     volumeSliderCounter.style("color", "orange")
+    // Create level buttons
+    for (let i = 0; i < levelCount; i++) {
+        levelButtons[i] = createButton("Level " + (i+1))
+        levelButtons[i].size(W/4, H/8)
+        levelButtons[i].position(W/2-W/8, H/2-H/8)
+        levelButtons[i].mousePressed(() => {
+            transitioning = true
+            gameState = "level " + (i+1) + "_"
+        })
+        levelButtons[i].style("font-size", W/16 + "px")
+        levelButtons[i].style("font-family", "TheFountainofWishes")
+    }
 }
 
 function draw() {
@@ -137,6 +154,9 @@ function draw() {
         background(backgroundDesign)
         title.html("Level Select")
         mainMenuButton.show()
+        for(let i=1;i<=levelCount;i++) {
+            levelButtons[i].show()
+        }
     }
     // Options menu
     else if(gameState === "options") {
@@ -153,6 +173,33 @@ function draw() {
         // Update volume slider counter
         vol = volumeSlider.value()
         volumeSliderCounter.html(vol + "%")
+    } else {
+        // Hide everything
+        startButton.hide()
+        optionsButton.hide()
+        for(let i=1;i<=levelCount;i++) {
+            levelButtons[i].hide()
+        }
+        // Draw level
+        background(backgroundDesign)
+        mainMenuButton.show()
+        if(gameState === "level 1") {
+            level1()
+        } else if(gameState === "level 2") {
+            level2()
+        } else if(gameState === "level 3") {
+            level3()
+        } else if(gameState === "level 4") {
+            level4()
+        } else if(gameState === "level 5") {
+            level5()
+        } else if(gameState === "level 6") {
+            level6()
+        } else if(gameState === "level 7") {
+            level7()
+        } else if(gameState === "level 8") {
+            level8()
+        }
     }
     // Fancy transition bs cause I was bored one night
     if(transitioning) {
