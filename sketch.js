@@ -132,16 +132,7 @@ function setup() {
         levelButtons[i].style("font-size", W/16 + "px")
         levelButtons[i].style("font-family", "TheFountainofWishes")
         if(i > 0) {
-            levelButtons[i].style("background-image", "url(images/lock.png)")
-            levelButtons[i].style("background-size", "50% 100%")
-            levelButtons[i].style("background-repeat", "no-repeat")
-            levelButtons[i].style("background-position", "center")
-            // Prevent clicking
-            levelButtons[i].mousePressed(() => {})
-            levelButtons[i].mouseOver(() => {})
-            levelButtons[i].mouseOut(() => {})
-            levelButtons[i].style("background-color", "rgba(0, 0, 0, 0.4)")
-            levelButtons[i].style("color", "rgba(255, 255, 255, 0.4)")
+            levelButtons[i].addClass("locked")
         }
     }
 }
@@ -173,6 +164,21 @@ function draw() {
         title.html("Level Select")
         mainMenuButton.show()
         for(let i=0;i<levelCount;i++) {
+            if(levelButtons[i].hasClass("locked")) {
+                levelButtons[i].style("background-image", "url(images/lock.png)")
+                levelButtons[i].style("background-size", "50% 100%")
+                levelButtons[i].style("background-repeat", "no-repeat")
+                levelButtons[i].style("background-position", "center")
+                // Prevent clicking
+                levelButtons[i].mousePressed(() => {
+                })
+                levelButtons[i].mouseOver(() => {
+                })
+                levelButtons[i].mouseOut(() => {
+                })
+                levelButtons[i].style("background-color", "rgba(0, 0, 0, 0.4)")
+                levelButtons[i].style("color", "rgba(255, 255, 255, 0.4)")
+            }
             levelButtons[i].show()
         }
     }
