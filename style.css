@@ -8,10 +8,13 @@ html, body {
     padding: 0;
     background-color: #767676;
     font-family: 'TheFountainofWishes', serif;
-    }
+    overflow: hidden
+}
+
 canvas {
     display: block;
 }
+
 #transition {
     position: fixed;
     z-index: 100;
