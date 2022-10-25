@@ -399,6 +399,9 @@ function draw() {
 
     function level1() {
         background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
         fill(0)
         if (mouseIsPressed) {
             drawnPos.push([mouseX, mouseY])
@@ -406,19 +409,34 @@ function draw() {
         drawnPos.forEach((i) => {
             circle(i[0], i[1], 30)
         })
-
     }
 
     function level2() {
+        background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
     }
 
     function level3() {
+        background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
     }
 
     function level4() {
+        background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
     }
 
     function level5() {
+        background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
     }
 
     function level6() {
@@ -491,9 +509,17 @@ function draw() {
     }
 
     function level7() {
+        background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
     }
 
     function level8() {
+        background(backgroundGradient)
+        title.html("Level " + gameState.slice(-1))
+        clearButton.show()
+        submitButton.show()
     }
 }
 
