@@ -399,16 +399,59 @@ function draw() {
 
     function level1() {
         background(backgroundGradient)
-        title.html("Level " + gameState.slice(-1))
         clearButton.show()
-        submitButton.show()
-        fill(0)
-        if (mouseIsPressed) {
-            drawnPos.push([mouseX, mouseY])
+        // Draw the line to be traced
+        fill(128)
+        // TODO: ADD DRAW FUNCTION HERE
+        // Count grey pixels
+        greyPixels = 0
+        loadPixels()
+        for (let i = 0; i < pixels.length; i += 4) {
+            if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
-        drawnPos.forEach((i) => {
-            circle(i[0], i[1], 30)
-        })
+        // User drawing
+        fill(0)
+        if (!submit) {
+            title.html("Level " + gameState.slice(-1))
+            submitButton.show()
+            if (mouseIsPressed) {
+                drawnPos.push([mouseX, mouseY])
+            }
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30)
+            })
+        } else {
+            submitButton.hide()
+            // Calculate accuracy
+            greyPixelsLeft = 0
+            loadPixels()
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixelsLeft++
+            }
+            let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
+            // Check how much user went over
+            fill(255, 0, 255)
+            // TODO: ADD DRAW FUNCTION
+            updatePixels()
+            let pixels_over = 0
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+            }
+            accuracy -= pixels_over / greyPixels
+            // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
+            if (accuracy >= 0.7) {
+                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                title.html("Good Job!")
+                title.style("color", "green")
+                levelComplete.play()
+                submit = false
+            } else {
+                title.html("Try Again")
+                title.style("color", "red")
+                levelFail.play()
+                submit = false
+            }
+        }
     }
 
     function level2() {
@@ -459,7 +502,7 @@ function draw() {
         }
         // User drawing
         fill(0)
-        if(!submit) {
+        if (!submit) {
             title.html("Level " + gameState.slice(-1))
             submitButton.show()
             if (mouseIsPressed) {
@@ -520,10 +563,62 @@ function draw() {
 
     function level8() {
         background(backgroundGradient)
-        title.html("Level " + gameState.slice(-1))
         clearButton.show()
-        submitButton.show()
+        // Draw the line to be traced
+        fill(128)
+        // TODO: ADD DRAW FUNCTION HERE
+        // Count grey pixels
+        greyPixels = 0
+        loadPixels()
+        for (let i = 0; i < pixels.length; i += 4) {
+            if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
+        }
+        // User drawing
+        fill(0)
+        if (!submit) {
+            title.html("Level " + gameState.slice(-1))
+            submitButton.show()
+            if (mouseIsPressed) {
+                drawnPos.push([mouseX, mouseY])
+            }
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30)
+            })
+        } else {
+            submitButton.hide()
+            // Calculate accuracy
+            greyPixelsLeft = 0
+            loadPixels()
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixelsLeft++
+            }
+            let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
+            // Check how much user went over
+            fill(255, 0, 255)
+            // TODO: ADD DRAW FUNCTION
+            updatePixels()
+            let pixels_over = 0
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+            }
+            accuracy -= pixels_over / greyPixels
+            // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
+            if (accuracy >= 0.7) {
+                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                title.html("Good Job!")
+                title.style("color", "green")
+                levelComplete.play()
+                submit = false
+            } else {
+                title.html("Try Again")
+                title.style("color", "red")
+                levelFail.play()
+                submit = false
+            }
+        }
     }
+
+
 }
 
 
