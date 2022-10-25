@@ -39,6 +39,9 @@ let backgroundDesign
 let startButton
 let optionsButton
 let mainMenuButton
+let clearButton
+let submitButton
+let levelButtons = []
 
 // Misc
 let fs
@@ -50,7 +53,8 @@ let vol = 100
 
 // Levels
 let levelCount = 8
-let levelButtons = []
+let greyPixels = 0
+let greyPixelsLeft = 0
 
 function setup() {
     // Set window size
@@ -120,6 +124,7 @@ function setup() {
     mainMenuButton.mousePressed(() => {
         transitioning = true
         gameState = "main menu_"
+        drawnPos = []
     })
     mainMenuButton.style("font-size", W / 28 + "px")
     mainMenuButton.style("font-family", "TheFountainofWishes")
@@ -177,6 +182,58 @@ function setup() {
     }
     // Bonez
     bonez = loadImage("images/what.gif")
+    clearButton = createButton("Clear")
+    clearButton.mousePressed(() => {
+        drawnPos = []
+    })
+    clearButton.mouseOver(() => {
+        clearButton.style("background-color", "rgba(192, 192, 192, 1)")
+    })
+    clearButton.mouseOut(() => {
+        clearButton.style("background-color", "rgba(255, 255, 255, 1)")
+    })
+    clearButton.style("background-color", "rgba(255, 255, 255, 1)")
+    clearButton.style("color", "black")
+    clearButton.style("font-family", "TheFountainofWishes")
+    clearButton.style("text-align", "center")
+    clearButton.style("font-size", 8 * W / 256 + "px")
+    clearButton.style("border-radius", "25%")
+    clearButton.size(W / 6, H / 8)
+    clearButton.position(W / 2 - W / 4, H - H / 6)
+    clearButton.style("font-size", W / 16 + "px")
+    submitButton = createButton("Submit")
+    submitButton.mousePressed(() => {
+        // Calculate accuracy
+        greyPixelsLeft = 0
+        loadPixels()
+        for (let i = 0; i < pixels.length; i += 4) {
+            if (pixels[i] === 128 && pixels[i+1] === 128 && pixels[i+2] === 128) greyPixelsLeft++
+        }
+        // Check how much user went over
+        fill(255, 0, 255)
+        x = W / 4
+        y = H / 2 + H / 16
+        while (x < W * (3 / 4)) {
+            x += 1
+            y = H / 2 - Math.cos(((6 * Math.PI) / (5 * W / 10)) * (x - W / 4)) * H / 8
+            circle(x, y, 40)
+        }
+    })
+    submitButton.mouseOver(() => {
+        submitButton.style("background-color", "rgba(192, 192, 192, 1)")
+    })
+    submitButton.mouseOut(() => {
+        submitButton.style("background-color", "rgba(255, 255, 255, 1)")
+    })
+    submitButton.style("background-color", "rgba(255, 255, 255, 1)")
+    submitButton.style("color", "black")
+    submitButton.style("font-family", "TheFountainofWishes")
+    submitButton.style("text-align", "center")
+    submitButton.style("font-size", 8 * W / 256 + "px")
+    submitButton.style("border-radius", "25%")
+    submitButton.size(W / 6, H / 8)
+    submitButton.position(W / 2 + W / 4 - W / 6, H - H / 6)
+    submitButton.style("font-size", W / 16 + "px")
 }
 
 function draw() {
@@ -204,7 +261,7 @@ function draw() {
         volumeSliderCounter.position(W / 2 + W / 12, H / 3 - H / 24)
         volumeSliderCounter.style("font-size", W / 32 + "px")
         for (let i = 0; i < levelCount; i++) {
-            levelButtons[i].size(W / 4, H / 8)
+            levelButtons[i].size(W / 4/ H / 8)
             levelButtons[i].position(
                 W / 2 - (35 * W / 128) + (i % 2) * (W / 4 + W / 32),
                 H / 2 - H / 5 + Math.floor(i / 2) * H / 6
@@ -212,8 +269,16 @@ function draw() {
             levelButtons[i].style("font-size", W / 16 + "px")
         }
         fs.position(W - 35, -5)
+        clearButton.size(W / 6, H / 8)
+        clearButton.position(W / 2 - W / 4, H - H / 6)
+        clearButton.style("font-size", W / 16 + "px")
+        submitButton.size(W / 6, H / 8)
+        submitButton.position(W / 2 + W / 4, H - H / 6)
+        submitButton.style("font-size", W / 16 + "px")
     }
 
+    unlockAll()
+    strokeWeight(0)
     // Fullscreen resize
     if (fullscreen() && (W !== displayWidth)) {
         W = displayWidth
@@ -237,6 +302,8 @@ function draw() {
         for (let i = 0; i < levelCount; i++) {
             levelButtons[i].hide()
         }
+        clearButton.hide()
+        submitButton.hide()
         // Draw main menu
         background(backgroundGradient)
         title.html("Learn2Draw")
@@ -338,6 +405,7 @@ function draw() {
     }
     if (bones) background(bonez)
 
+
     function level1() {
         background(backgroundGradient)
         fill(0)
@@ -348,6 +416,53 @@ function draw() {
             circle(i[0], i[1], 20)
         })
 
+    }
+
+    function level2() {
+    }
+
+    function level3() {
+    }
+
+    function level4() {
+    }
+
+    function level5() {
+    }
+
+    function level6() {
+        background(backgroundGradient)
+        clearButton.show()
+        submitButton.show()
+        // Draw the line to be traced
+        fill(128)
+        let x = W / 4
+        let y = H / 2 + H / 16
+        while (x < W * (3 / 4)) {
+            x += 1
+            y = H / 2 - Math.cos(((6 * Math.PI) / (5 * W / 10)) * (x - W / 4)) * H / 8
+            if (x % 30 < 15) circle(x, y, 10)
+        }
+        // Count grey pixels
+        greyPixels = 0
+        loadPixels()
+        for (let i = 0; i < pixels.length; i += 4) {
+            if (pixels[i] === 128 && pixels[i+1] === 128 && pixels[i+2] === 128) greyPixels++
+        }
+        // User drawing
+        fill(0)
+        if (mouseIsPressed) {
+            drawnPos.push([mouseX, mouseY])
+        }
+        drawnPos.forEach((i) => {
+            circle(i[0], i[1], 20)
+        })
+    }
+
+    function level7() {
+    }
+
+    function level8() {
     }
 }
 
@@ -365,5 +480,11 @@ function keyPressed() {
             ee = ""
             bones = false
         }
+    }
+}
+
+function unlockAll() {
+    for (let i = 0; i < levelCount; i++) {
+        levelButtons[i].removeClass("locked")
     }
 }
