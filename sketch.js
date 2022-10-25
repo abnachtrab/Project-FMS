@@ -1,3 +1,13 @@
+/*
+ * This project was created by Adam Nachtrab, Erkhem Erdembileg, Eyan Martucci, and Thomas Jennewein.
+ * This project was created during the Fall 2022 semester at Arizona State University for the course FSE 100.
+ * Code in this project is original and was created by the authors listed above.
+ * Font used in this project is licensed for non-commercial use, and can be found at https://www.fontspace.com/the-fountain-of-wishes-font-f85599.
+ * Images used in this project were either created by the authors or are free to use with modification.
+ * P5.js was used to create this project, it's license can be found at https://p5js.org/copyright.html.
+ * The copying or distribution all or portions of this project is prohibited without the express written consent of the authors.
+ */
+
 //// Constants
 
 // Width and height of canvas (in pixels) Default: 854x480
@@ -323,6 +333,8 @@ function draw() {
             document.getElementById("transition").style.opacity = transTime
             transTime += (deltaTime / (500 * transMult)) * transDir
         }
+    } else {
+        document.getElementById("transition").style.opacity = "0"
     }
     if (bones) background(bonez)
 
