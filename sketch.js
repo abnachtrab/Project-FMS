@@ -50,11 +50,14 @@ let volumeSliderLabel
 let volumeSliderCounter
 let volumeSlider
 let vol = 100
+let levelComplete
+let levelFail
 
 // Levels
 let levelCount = 8
 let greyPixels = 0
 let greyPixelsLeft = 0
+let submit = false
 
 function setup() {
     // Set window size
@@ -84,12 +87,15 @@ function setup() {
     fs.style("text-decoration", "none")
     fs.style("display", "inline-block")
     fs.style("font-size", "32px")
+    // Import sounds
+    levelComplete = loadSound("assets/sounds/levelComplete.mp3")
+    levelFail = loadSound("assets/sounds/levelFail.mp3")
     // Resize transition div
     document.getElementById("transition").style.width = (W + "px")
     document.getElementById("transition").style.height = (H + "px")
     // Load backgrounds
-    backgroundGradient = loadImage("images/gradient-bg.png")
-    backgroundDesign = loadImage("images/design-bg.png")
+    backgroundGradient = loadImage("assets/images/gradient-bg.png")
+    backgroundDesign = loadImage("assets/images/design-bg.png")
     // Create Title
     title = createElement("h1", "Learn2Draw")
     title.size(W, H / 4)
@@ -203,21 +209,7 @@ function setup() {
     clearButton.style("font-size", W / 16 + "px")
     submitButton = createButton("Submit")
     submitButton.mousePressed(() => {
-        // Calculate accuracy
-        greyPixelsLeft = 0
-        loadPixels()
-        for (let i = 0; i < pixels.length; i += 4) {
-            if (pixels[i] === 128 && pixels[i+1] === 128 && pixels[i+2] === 128) greyPixelsLeft++
-        }
-        // Check how much user went over
-        fill(255, 0, 255)
-        x = W / 4
-        y = H / 2 + H / 16
-        while (x < W * (3 / 4)) {
-            x += 1
-            y = H / 2 - Math.cos(((6 * Math.PI) / (5 * W / 10)) * (x - W / 4)) * H / 8
-            circle(x, y, 40)
-        }
+        submit = true
     })
     submitButton.mouseOver(() => {
         submitButton.style("background-color", "rgba(192, 192, 192, 1)")
@@ -261,7 +253,7 @@ function draw() {
         volumeSliderCounter.position(W / 2 + W / 12, H / 3 - H / 24)
         volumeSliderCounter.style("font-size", W / 32 + "px")
         for (let i = 0; i < levelCount; i++) {
-            levelButtons[i].size(W / 4/ H / 8)
+            levelButtons[i].size(W / 4 / H / 8)
             levelButtons[i].position(
                 W / 2 - (35 * W / 128) + (i % 2) * (W / 4 + W / 32),
                 H / 2 - H / 5 + Math.floor(i / 2) * H / 6
@@ -276,6 +268,7 @@ function draw() {
         submitButton.position(W / 2 + W / 4, H - H / 6)
         submitButton.style("font-size", W / 16 + "px")
     }
+
     strokeWeight(0)
     // Fullscreen resize
     if (fullscreen() && (W !== displayWidth)) {
@@ -411,7 +404,7 @@ function draw() {
             drawnPos.push([mouseX, mouseY])
         }
         drawnPos.forEach((i) => {
-            circle(i[0], i[1], 20)
+            circle(i[0], i[1], 30)
         })
 
     }
@@ -431,7 +424,6 @@ function draw() {
     function level6() {
         background(backgroundGradient)
         clearButton.show()
-        submitButton.show()
         // Draw the line to be traced
         fill(128)
         let x = W / 4
@@ -445,16 +437,57 @@ function draw() {
         greyPixels = 0
         loadPixels()
         for (let i = 0; i < pixels.length; i += 4) {
-            if (pixels[i] === 128 && pixels[i+1] === 128 && pixels[i+2] === 128) greyPixels++
+            if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
         // User drawing
         fill(0)
-        if (mouseIsPressed) {
-            drawnPos.push([mouseX, mouseY])
+        if(!submit) {
+            title.html("Level " + gameState.slice(-1))
+            submitButton.show()
+            if (mouseIsPressed) {
+                drawnPos.push([mouseX, mouseY])
+            }
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30)
+            })
+        } else {
+            submitButton.hide()
+            // Calculate accuracy
+            greyPixelsLeft = 0
+            loadPixels()
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixelsLeft++
+            }
+            accuracy = (greyPixels - greyPixelsLeft) / greyPixels
+            // Check how much user went over
+            fill(255, 0, 255)
+            x = W / 4
+            y = H / 2 + H / 16
+            while (x < W * (3 / 4)) {
+                x += 1
+                y = H / 2 - Math.cos(((6 * Math.PI) / (5 * W / 10)) * (x - W / 4)) * H / 8
+                circle(x, y, 50)
+            }
+            updatePixels()
+            let pixels_over = 0
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+            }
+            accuracy -= pixels_over / greyPixels
+            // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
+            if (accuracy >= 0.7) {
+                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                title.html("Good Job!")
+                title.style("color", "green")
+                levelComplete.play()
+                submit = false
+            } else {
+                title.html("Try Again")
+                title.style("color", "red")
+                levelFail.play()
+                submit = false
+            }
         }
-        drawnPos.forEach((i) => {
-            circle(i[0], i[1], 20)
-        })
     }
 
     function level7() {
@@ -466,28 +499,18 @@ function draw() {
 
 
 function keyPressed() {
-    if (keyCode === 27) {
-        transitioning = true
-        gameState = "main menu_"
-    } else {
-        ee += key
-        if (ee.includes("bones") && !bones && !ee.includes("no  bones") && !ee.includes("nobones")) {
-            ee = ""
-            bones = true
-        } else if ((ee.includes("nobones") || ee.includes("no bones")) && bones) {
-            ee = ""
-            bones = false
-        } else if (ee.includes("unlock")) {
-            ee = ""
-            for (let i = 0; i < levelCount; i++) {
-                levelButtons[i].removeClass("locked")
-            }
+    ee += key
+    if (ee.includes("bones") && !bones && !ee.includes("no  bones") && !ee.includes("nobones")) {
+        ee = ""
+        bones = true
+    } else if ((ee.includes("nobones") || ee.includes("no bones")) && bones) {
+        ee = ""
+        bones = false
+    } else if (ee.includes("unlock")) {
+        ee = ""
+        for (let i = 0; i < levelCount; i++) {
+            levelButtons[i].removeClass("locked")
         }
-    }
-}
-
-function unlockAll() {
-    for (let i = 0; i < levelCount; i++) {
-        levelButtons[i].removeClass("locked")
+        console.log("Unlocked all levels")
     }
 }

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'TheFountainofWishes';
-    src: url('/fonts/TheFountainofWishes.ttf') format('truetype');
+    src: url('/assets/fonts/TheFountainofWishes.ttf') format('truetype');
 }
 
 html, body {
