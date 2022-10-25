@@ -276,8 +276,6 @@ function draw() {
         submitButton.position(W / 2 + W / 4, H - H / 6)
         submitButton.style("font-size", W / 16 + "px")
     }
-
-    unlockAll()
     strokeWeight(0)
     // Fullscreen resize
     if (fullscreen() && (W !== displayWidth)) {
@@ -479,6 +477,11 @@ function keyPressed() {
         } else if ((ee.includes("nobones") || ee.includes("no bones")) && bones) {
             ee = ""
             bones = false
+        } else if (ee.includes("unlock")) {
+            ee = ""
+            for (let i = 0; i < levelCount; i++) {
+                levelButtons[i].removeClass("locked")
+            }
         }
     }
 }
