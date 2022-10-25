@@ -372,7 +372,7 @@ function draw() {
             level8()
         }
     }
-    // Fancy transition bs cause I was bored one night
+    // Fancy transition because I was bored one night
     if (transitioning) {
         // If transition is complete, stop transitioning
         if (transTime < 0) {
