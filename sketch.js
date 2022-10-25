@@ -187,7 +187,7 @@ function setup() {
         }
     }
     // Bonez
-    bonez = loadImage("images/what.gif")
+    bonez = loadImage("assets/images/what.gif")
     clearButton = createButton("Clear")
     clearButton.mousePressed(() => {
         drawnPos = []
@@ -491,6 +491,9 @@ function draw() {
             for (let i = 0; i < pixels.length; i += 4) {
                 if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
             }
+            console.log(pixels_over)
+            console.log(accuracy)
+            console.log(greyPixels)
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
@@ -529,9 +532,11 @@ function keyPressed() {
     if (ee.includes("bones") && !bones && !ee.includes("no  bones") && !ee.includes("nobones")) {
         ee = ""
         bones = true
+        console.log("Bones")
     } else if ((ee.includes("nobones") || ee.includes("no bones")) && bones) {
         ee = ""
         bones = false
+        console.log("No Bones")
     } else if (ee.includes("unlock")) {
         ee = ""
         for (let i = 0; i < levelCount; i++) {
