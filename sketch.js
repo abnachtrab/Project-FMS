@@ -312,7 +312,7 @@ function draw() {
         mainMenuButton.show()
         for (let i = 0; i < levelCount; i++) {
             if (levelButtons[i].hasClass("locked")) {
-                levelButtons[i].style("background-image", "url(images/lock.png)")
+                levelButtons[i].style("background-image", "url(assets/images/lock.png)")
                 levelButtons[i].style("background-size", "50% 100%")
                 levelButtons[i].style("background-repeat", "no-repeat")
                 levelButtons[i].style("background-position", "center")
