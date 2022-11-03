@@ -194,7 +194,7 @@ function setup() {
         clearButton.style("background-color", "rgba(255, 255, 255, 1)")
     })
     clearButton.style("background-color", "rgba(255, 255, 255, 1)")
-    clearButton.style("color", "black")
+    clearButton.style("color", "rgba(5,5,5,1)")
     clearButton.style("font-family", "TheFountainofWishes")
     clearButton.style("text-align", "center")
     clearButton.style("font-size", 8 * W / 256 + "px")
@@ -213,7 +213,7 @@ function setup() {
         submitButton.style("background-color", "rgba(255, 255, 255, 1)")
     })
     submitButton.style("background-color", "rgba(255, 255, 255, 1)")
-    submitButton.style("color", "black")
+    submitButton.style("color", "rgba(5,5,5,1)")
     submitButton.style("font-family", "TheFountainofWishes")
     submitButton.style("text-align", "center")
     submitButton.style("font-size", 8 * W / 256 + "px")
@@ -310,6 +310,7 @@ function draw() {
         // Draw level select screen
         background(backgroundDesign)
         title.html("Level Select")
+        title.style("color", "#FF8C00")
         mainMenuButton.show()
         for (let i = 0; i < levelCount; i++) {
             if (levelButtons[i].hasClass("locked")) {
@@ -326,6 +327,14 @@ function draw() {
                 })
                 levelButtons[i].style("background-color", "rgba(0, 0, 0, 0.4)")
                 levelButtons[i].style("color", "rgba(255, 255, 255, 0.4)")
+            } else {
+                levelButtons[i].style("background-image", "url()")
+                levelButtons[i].style("background-color", "rgba(255, 255, 255, 1)")
+                levelButtons[i].style("color", "rgba(0, 0, 0, 1)")
+                levelButtons[i].mousePressed(() => {
+                    transitioning = true
+                    gameState = "level " + (i + 1) + "_"
+                })
             }
             levelButtons[i].show()
         }
@@ -399,30 +408,42 @@ function draw() {
 
     function level1() {
         background(backgroundGradient)
-        clearButton.show()
+        // Draw a hollow box
+        fill(0, 0, 0, 0)
+        stroke(64)
+        strokeWeight(3)
+        rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
+        strokeWeight(0)
         fill(128)
         // TODO: ADD DRAW FUNCTION HERE
         // Count grey pixels
-        greyPixels = 0
+        let greyPixels = 0
+        let greyPixelsLeft = 0
         loadPixels()
         for (let i = 0; i < pixels.length; i += 4) {
             if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
         // User drawing
+        strokeWeight(0)
         fill(0)
         if (!submit) {
             title.html("Level " + gameState.slice(-1))
             title.style("color", "#FF8C00")
+            clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
-                circle(i[0], i[1], 30)
+                circle(i[0], i[1], 30*(W/1000))
             })
         } else {
+            clearButton.hide()
             submitButton.hide()
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30*(W/1000))
+            })
             // Calculate accuracy
             greyPixelsLeft = 0
             loadPixels()
@@ -436,29 +457,48 @@ function draw() {
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
-                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+                if (pixels[i] === 0 && pixels[i + 1] === 0 && pixels[i + 2] === 0) pixels_over++
             }
-            accuracy -= pixels_over / greyPixels
+            accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                if (!hasPlayed) levelComplete.play()
+                hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
-                levelComplete.play()
-                submit = false
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                    drawnPos = []
+                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
+                }, 2000)
             } else {
+                if (!hasPlayed) levelFail.play()
+                hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
-                levelFail.play()
-                submit = false
+                // Wait 2 seconds and then clear
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                }, 2000)
+                drawnPos = []
             }
         }
     }
 
     function level2() {
         background(backgroundGradient)
-        clearButton.show()
+        // Draw a hollow box
+        fill(0, 0, 0, 0)
+        stroke(64)
+        strokeWeight(3)
+        rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
+        strokeWeight(0)
+        fill(128)
         // TODO: ADD DRAW FUNCTION HERE
 
         let xCenter = W/2
@@ -494,24 +534,32 @@ function draw() {
         */
 
         // Count grey pixels
-        greyPixels = 0
+        let greyPixels = 0
+        let greyPixelsLeft = 0
         loadPixels()
         for (let i = 0; i < pixels.length; i += 4) {
             if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
         // User drawing
+        strokeWeight(0)
         fill(0)
         if (!submit) {
             title.html("Level " + gameState.slice(-1))
+            title.style("color", "#FF8C00")
+            clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
-                circle(i[0], i[1], 30)
+                circle(i[0], i[1], 30*(W/1000))
             })
         } else {
+            clearButton.hide()
             submitButton.hide()
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30*(W/1000))
+            })
             // Calculate accuracy
             greyPixelsLeft = 0
             loadPixels()
@@ -525,36 +573,52 @@ function draw() {
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
-                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+                if (pixels[i] === 0 && pixels[i + 1] === 0 && pixels[i + 2] === 0) pixels_over++
             }
-            accuracy -= pixels_over / greyPixels
+            accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                if (!hasPlayed) levelComplete.play()
+                hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
-                levelComplete.play()
-                submit = false
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                    drawnPos = []
+                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
+                }, 2000)
             } else {
+                if (!hasPlayed) levelFail.play()
+                hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
-                levelFail.play()
-                submit = false
+                // Wait 2 seconds and then clear
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                }, 2000)
+                drawnPos = []
             }
         }
     }
 
     function level3() {
-        background(backgroundGradient)
-        title.html("Level " + gameState.slice(-1))
-        clearButton.show()
-        submitButton.show()
+
     }
 
     function level4() {
         background(backgroundGradient)
-        clearButton.show()
+        // Draw a hollow box
+        fill(0, 0, 0, 0)
+        stroke(64)
+        strokeWeight(3)
+        rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
+        strokeWeight(0)
+        fill(128)
         // TODO: ADD DRAW FUNCTION HERE
 
         let xCenter = W/2
@@ -566,24 +630,32 @@ function draw() {
         square(xCenter - ((1/8) * xCenter), yCenter - ((1/8) * yCenter), 100)
 
         // Count grey pixels
-        greyPixels = 0
+        let greyPixels = 0
+        let greyPixelsLeft = 0
         loadPixels()
         for (let i = 0; i < pixels.length; i += 4) {
             if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
         // User drawing
+        strokeWeight(0)
         fill(0)
         if (!submit) {
             title.html("Level " + gameState.slice(-1))
+            title.style("color", "#FF8C00")
+            clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
-                circle(i[0], i[1], 30)
+                circle(i[0], i[1], 30*(W/1000))
             })
         } else {
+            clearButton.hide()
             submitButton.hide()
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30*(W/1000))
+            })
             // Calculate accuracy
             greyPixelsLeft = 0
             loadPixels()
@@ -597,30 +669,40 @@ function draw() {
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
-                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+                if (pixels[i] === 0 && pixels[i + 1] === 0 && pixels[i + 2] === 0) pixels_over++
             }
-            accuracy -= pixels_over / greyPixels
+            accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                if (!hasPlayed) levelComplete.play()
+                hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
-                levelComplete.play()
-                submit = false
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                    drawnPos = []
+                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
+                }, 2000)
             } else {
+                if (!hasPlayed) levelFail.play()
+                hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
-                levelFail.play()
-                submit = false
+                // Wait 2 seconds and then clear
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                }, 2000)
+                drawnPos = []
             }
         }
     }
 
     function level5() {
-        background(backgroundGradient)
-        title.html("Level " + gameState.slice(-1))
-        clearButton.show()
-        submitButton.show()
+
     }
 
     function level6() {
@@ -642,11 +724,11 @@ function draw() {
         }
         // Count grey pixels
         let greyPixels = 0
+        let greyPixelsLeft = 0
         loadPixels()
         for (let i = 0; i < pixels.length; i += 4) {
             if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
-        console.log("BEFORE: " + greyPixels)
         // User drawing
         strokeWeight(0)
         fill(0)
@@ -655,7 +737,7 @@ function draw() {
             title.style("color", "#FF8C00")
             clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
@@ -668,14 +750,11 @@ function draw() {
                 circle(i[0], i[1], 30*(W/1000))
             })
             // Calculate accuracy
-            let greyPixelsLeft = 0
+            greyPixelsLeft = 0
             loadPixels()
             for (let i = 0; i < pixels.length; i += 4) {
                 if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixelsLeft++
             }
-            updatePixels()
-            console.log("AFTER: " + greyPixels)
-            console.log(greyPixelsLeft)
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
@@ -691,7 +770,7 @@ function draw() {
             for (let i = 0; i < pixels.length; i += 4) {
                 if (pixels[i] === 0 && pixels[i + 1] === 0 && pixels[i + 2] === 0) pixels_over++
             }
-            accuracy -= pixels_over / greyPixels
+            accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
                 if (!hasPlayed) levelComplete.play()
@@ -701,6 +780,10 @@ function draw() {
                 setTimeout(() => {
                     hasPlayed = false
                     submit = false
+                    drawnPos = []
+                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
@@ -718,10 +801,7 @@ function draw() {
     }
 
     function level7() {
-        background(backgroundGradient)
-        title.html("Level " + gameState.slice(-1))
-        clearButton.show()
-        submitButton.show()
+
     }
 
     function level8() {
@@ -731,24 +811,32 @@ function draw() {
         fill(128)
         // TODO: ADD DRAW FUNCTION HERE
         // Count grey pixels
-        greyPixels = 0
+        let greyPixels = 0
+        let greyPixelsLeft = 0
         loadPixels()
         for (let i = 0; i < pixels.length; i += 4) {
             if (pixels[i] === 128 && pixels[i + 1] === 128 && pixels[i + 2] === 128) greyPixels++
         }
         // User drawing
+        strokeWeight(0)
         fill(0)
         if (!submit) {
             title.html("Level " + gameState.slice(-1))
+            title.style("color", "#FF8C00")
+            clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
-                circle(i[0], i[1], 30)
+                circle(i[0], i[1], 30*(W/1000))
             })
         } else {
+            clearButton.hide()
             submitButton.hide()
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30*(W/1000))
+            })
             // Calculate accuracy
             greyPixelsLeft = 0
             loadPixels()
@@ -762,21 +850,34 @@ function draw() {
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
-                if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
+                if (pixels[i] === 0 && pixels[i + 1] === 0 && pixels[i + 2] === 0) pixels_over++
             }
-            accuracy -= pixels_over / greyPixels
+            accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                if (!hasPlayed) levelComplete.play()
+                hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
-                levelComplete.play()
-                submit = false
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                    drawnPos = []
+                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
+                }, 2000)
             } else {
+                if (!hasPlayed) levelFail.play()
+                hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
-                levelFail.play()
-                submit = false
+                // Wait 2 seconds and then clear
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                }, 2000)
+                drawnPos = []
             }
         }
     }
@@ -787,11 +888,39 @@ function draw() {
 
 function keyPressed() {
     ee += key
-    if (ee.includes("unlock")) {
+    if (ee.includes("unlockall")) {
         ee = ""
         for (let i = 0; i < levelCount; i++) {
             levelButtons[i].removeClass("locked")
         }
         console.log("Unlocked all levels")
+    } else if (ee.includes("unlock2")) {
+        ee = ""
+        levelButtons[1].removeClass("locked")
+        console.log("Unlocked level 2")
+    } else if (ee.includes("unlock3")) {
+        ee = ""
+        levelButtons[2].removeClass("locked")
+        console.log("Unlocked level 3")
+    } else if (ee.includes("unlock4")) {
+        ee = ""
+        levelButtons[3].removeClass("locked")
+        console.log("Unlocked level 4")
+    } else if (ee.includes("unlock5")) {
+        ee = ""
+        levelButtons[4].removeClass("locked")
+        console.log("Unlocked level 5")
+    } else if (ee.includes("unlock6")) {
+        ee = ""
+        levelButtons[5].removeClass("locked")
+        console.log("Unlocked level 6")
+    } else if (ee.includes("unlock7")) {
+        ee = ""
+        levelButtons[6].removeClass("locked")
+        console.log("Unlocked level 7")
+    } else if (ee.includes("unlock8")) {
+        ee = ""
+        levelButtons[7].removeClass("locked")
+        console.log("Unlocked level 8")
     }
 }
