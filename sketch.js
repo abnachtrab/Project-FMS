@@ -940,10 +940,21 @@ function draw() {
 
     function level8() {
         background(backgroundGradient)
-        clearButton.show()
+        // Draw a hollow box
+        fill(0, 0, 0, 0)
+        stroke(64)
+        strokeWeight(3)
+        rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
+        strokeWeight(0)
         fill(128)
-        // TODO: ADD DRAW FUNCTION HERE
+        ////////
+        ////////
+        ////////
+        // Draw formula here
+        ////////
+        ////////
+        ////////
         // Count grey pixels
         let greyPixels = 0
         let greyPixelsLeft = 0
@@ -980,7 +991,13 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            // TODO: ADD DRAW FUNCTION
+            ////////
+            ////////
+            ////////
+            // Draw formula here
+            ////////
+            ////////
+            ////////
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
