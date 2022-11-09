@@ -504,39 +504,30 @@ function draw() {
         // Draw the line to be traced
         strokeWeight(0)
         fill(128)
-        // TODO: ADD DRAW FUNCTION HERE
 
         let xCenter = W/2
         let yCenter = H/2
-        //let x = xCenter
-        //let y = 0
+        let x = -100
+        let y = 0
 
-        noFill()
-        strokeWeight(5)
-        color(0)
+        while (x <= 100) {
 
-        circle(xCenter, yCenter, 200)
+            y = Math.sqrt(10000-x**2)
 
-        /*
-        //Attempt at dotted lines
-        x += 1
-        y = Math.sqrt(40000 - (x * x))
-
-        if (x % 30 < 15) {
-            fill(200)
-            circle(x,y,100)
+            //while in the middle %50 of circle
+            if ((x < 25 || x > 75) && (y % 30 < 15)) {
+                if(!(x < 10 && x > -10)) {
+                    circle(x + xCenter, y + yCenter, 10)
+                    circle(x + xCenter, -y + yCenter, 10)
+                }
+            }
+            //while in the outer %50 percentage of the circle
+            if ((x > 25 && x < 75) && (x % 30 < 15)) {
+                circle(x + xCenter, y + yCenter, 10)
+                circle(x + xCenter, -y + yCenter, 10)
+            }
+            x += 0.1
         }
-        console.log(x)
-        */
-
-        /*
-        //Reference Function
-        while (x < W * (3 / 4)) {
-            x += 1
-            y = H / 2 - Math.cos(((6 * Math.PI) / (5 * W / 10)) * (x - W / 4)) * H / 8
-            if (x % 30 < 15) circle(x, y, 10)
-        }
-        */
 
         // Count grey pixels
         let greyPixels = 0
@@ -574,7 +565,31 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            // TODO: ADD DRAW FUNCTION
+
+            let xCenter = W/2
+            let yCenter = H/2
+            let x = -100
+            let y = 0
+
+            while (x <= 100) {
+
+                y = Math.sqrt(10000-x**2)
+
+                //while in the middle %50 of circle
+                if ((x < 25 || x > 75) && (y % 30 < 15)) {
+                    if(!(x < 10 && x > -10)) {
+                        circle(x + xCenter, y + yCenter, 10)
+                        circle(x + xCenter, -y + yCenter, 10)
+                    }
+                }
+                //while in the outer %50 percentage of the circle
+                if ((x > 25 && x < 75) && (x % 30 < 15)) {
+                    circle(x + xCenter, y + yCenter, 10)
+                    circle(x + xCenter, -y + yCenter, 10)
+                }
+                x += 0.1
+            }
+
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
