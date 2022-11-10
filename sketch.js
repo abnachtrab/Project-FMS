@@ -307,6 +307,8 @@ function draw() {
         // Hide things from other states
         startButton.hide()
         optionsButton.hide()
+        submitButton.hide()
+        clearButton.hide()
         // Draw level select screen
         background(backgroundDesign)
         title.html("Level Select")
@@ -596,13 +598,17 @@ function draw() {
 
     function level3() {
         background(backgroundGradient)
-        clearButton.show()
+        // Draw a hollow box
+        fill(0, 0, 0, 0)
+        stroke(64)
+        strokeWeight(3)
+        rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
         fill(128)
         // TODO: ADD DRAW FUNCTION HERE
         noFill()
         strokeWeight(10)
-        stroke(0)
+        stroke(128)
         circle(W / 2, 3 * H / 10, 5 * H / 48) // head
         line(W / 2, 29 * H / 80, W / 2, 6 * H / 10) // torso
         line(W / 2, 6 * H / 10, 9 * W / 20, 8 * H / 10) // left leg
@@ -617,10 +623,12 @@ function draw() {
         }
         // User drawing
         fill(0)
+        strokeWeight(0)
         if (!submit) {
             title.html("Level " + gameState.slice(-1))
+            clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
@@ -777,13 +785,17 @@ function draw() {
 
     function level5() {
         background(backgroundGradient)
-        clearButton.show()
+        // Draw a hollow box
+        fill(0, 0, 0, 0)
+        stroke(64)
+        strokeWeight(3)
+        rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
         fill(128)
         // TODO: ADD DRAW FUNCTION HERE
         noFill()
         strokeWeight(10)
-        stroke(0)
+        stroke(128)
         circle(2 * W / 5, 13 * H / 20, 10 * H / 48) // back wheel
         circle(3 * W / 5, 13 * H / 20, 10 * H / 48) // front wheel
         line(2 * W / 5, 13 * H / 20, 9 * W / 20, 5 * H / 10) // back axle
@@ -803,10 +815,12 @@ function draw() {
         }
         // User drawing
         fill(0)
+        strokeWeight(0)
         if (!submit) {
             title.html("Level " + gameState.slice(-1))
+            clearButton.show()
             submitButton.show()
-            if (mouseIsPressed) {
+            if (mouseIsPressed && mouseX > W / 4 - W / 8 && mouseX < W * (3 / 4) + W / 8 && mouseY > H / 2 - H / 4 && mouseY < H / 2 + H / 4) {
                 drawnPos.push([mouseX, mouseY])
             }
             drawnPos.forEach((i) => {
@@ -815,6 +829,9 @@ function draw() {
         } else {
             submitButton.hide()
             // Calculate accuracy
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30)
+            })
             greyPixelsLeft = 0
             loadPixels()
             for (let i = 0; i < pixels.length; i += 4) {
@@ -842,6 +859,9 @@ function draw() {
             }
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
+            console.log(accuracy)
+            console.log(greyPixels)
+            console.log(greyPixelsLeft)
             if (accuracy >= 0.7) {
                 if (!hasPlayed) levelComplete.play()
                 hasPlayed = true
