@@ -599,7 +599,7 @@ function draw() {
         noFill()
         strokeWeight(10)
         stroke(0)
-        circle(W / 2, 3 * H / 10, 100) // head
+        circle(W / 2, 3 * H / 10, 5 * H / 48) // head
         line(W / 2, 29 * H / 80, W / 2, 6 * H / 10) // torso
         line(W / 2, 6 * H / 10, 9 * W / 20, 8 * H / 10) // left leg
         line(W / 2, 6 * H / 10, 11 * W / 20, 8 * H / 10) // right leg
@@ -634,6 +634,12 @@ function draw() {
             // Check how much user went over
             fill(255, 0, 255)
             // TODO: ADD DRAW FUNCTION
+            circle(W / 2, 3 * H / 10, 5 * H / 48) // head
+            line(W / 2, 29 * H / 80, W / 2, 6 * H / 10) // torso
+            line(W / 2, 6 * H / 10, 9 * W / 20, 8 * H / 10) // left leg
+            line(W / 2, 6 * H / 10, 11 * W / 20, 8 * H / 10) // right leg
+            line(W / 2, H / 2, 2 * W / 5, 2 * H / 5) // left arm
+            line(W / 2, H / 2, 3 * W / 5, 2 * H / 5) // right arm
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
@@ -713,6 +719,12 @@ function draw() {
             // Check how much user went over
             fill(255, 0, 255)
             // TODO: ADD DRAW FUNCTION
+            circle(W / 2, 3 * H / 10, 5 * H / 48) // head
+            line(W / 2, 29 * H / 80, W / 2, 6 * H / 10) // torso
+            line(W / 2, 6 * H / 10, 9 * W / 20, 8 * H / 10) // left leg
+            line(W / 2, 6 * H / 10, 11 * W / 20, 8 * H / 10) // right leg
+            line(W / 2, H / 2, 2 * W / 5, 2 * H / 5) // left arm
+            line(W / 2, H / 2, 3 * W / 5, 2 * H / 5) // right arm
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
@@ -757,8 +769,8 @@ function draw() {
         noFill()
         strokeWeight(10)
         stroke(0)
-        circle(2 * W / 5, 13 * H / 20, 150) // back wheel
-        circle(3 * W / 5, 13 * H / 20, 150) // front wheel
+        circle(2 * W / 5, 13 * H / 20, 10 * H / 48) // back wheel
+        circle(3 * W / 5, 13 * H / 20, 10 * H / 48) // front wheel
         line(2 * W / 5, 13 * H / 20, 9 * W / 20, 5 * H / 10) // back axle
         line(2 * W / 5, 13 * H / 20, W / 2, 13 * H / 20) // bottom bar
         line(9 * W / 20, 5 * H / 10, 11 * W / 20, 5 * H / 10) // top bar
@@ -797,6 +809,17 @@ function draw() {
             // Check how much user went over
             fill(255, 0, 255)
             // TODO: ADD DRAW FUNCTION
+            circle(2 * W / 5, 13 * H / 20, 10 * H / 48) // back wheel
+            circle(3 * W / 5, 13 * H / 20, 10 * H / 48) // front wheel
+            line(2 * W / 5, 13 * H / 20, 9 * W / 20, 5 * H / 10) // back axle
+            line(2 * W / 5, 13 * H / 20, W / 2, 13 * H / 20) // bottom bar
+            line(9 * W / 20, 5 * H / 10, 11 * W / 20, 5 * H / 10) // top bar
+            line(W / 2, 13 * H / 20, 11 * W / 20, 5 * H / 10) // front bar
+            line(W / 2, 13 * H / 20, 9 * W / 20, 5 * H / 10) // middle bar
+            line(9 * W / 20, 5 * H / 10, 9 * W / 20, 9 * H / 20) // seat rest
+            line(17 * W / 40, 9 * H / 20, 19 * W / 40, 9 * H / 20) // seat
+            line(3 * W / 5, 13 * H / 20, 21 * W / 40, 8 * H / 20) // front axle
+            line(W / 2, 8 * H / 20, 45 * W / 80, 8 * H / 20) // handlebars
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
@@ -926,11 +949,11 @@ function draw() {
         fill(128)
         stroke(128)
         noFill()
-        circle(W / 2, 12 * H / 20, 150)
-        ellipse(37 * W / 80, 8 * H / 20, 100, 150)
-        ellipse(43 * W / 80, 8 * H / 20, 100, 150)
-        ellipse(8 * W / 20, 10 * H / 20, 100, 150)
-        ellipse(12 * W / 20, 10 * H / 20, 100, 150)
+        circle(W / 2, 12 * H / 20, 10 * H / 48)
+        ellipse(37 * W / 80, 8 * H / 20, 5 * H / 48, 10 * H / 48)
+        ellipse(43 * W / 80, 8 * H / 20, 5 * H / 48, 10 * H / 48)
+        ellipse(8 * W / 20, 10 * H / 20, 5 * H / 48, 10 * H / 48)
+        ellipse(12 * W / 20, 10 * H / 20, 5 * H / 48, 10 * H / 48)
 // Count grey pixels
         let greyPixels = 0
         let greyPixelsLeft = 0
@@ -967,11 +990,11 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            circle(W / 2, 11 * H / 20, 150)
-            ellipse(37 * W / 80, 7 * H / 20, 100, 150)
-            ellipse(43 * W / 80, 7 * H / 20, 100, 150)
-            ellipse(8 * W / 20, 9 * H / 20, 100, 150)
-            ellipse(12 * W / 20, 9 * H / 20, 100, 150)
+            circle(W / 2, 12 * H / 20, 10 * H / 48)
+            ellipse(37 * W / 80, 8 * H / 20, 5 * H / 48, 10 * H / 48)
+            ellipse(43 * W / 80, 8 * H / 20, 5 * H / 48, 10 * H / 48)
+            ellipse(8 * W / 20, 10 * H / 20, 5 * H / 48, 10 * H / 48)
+            ellipse(12 * W / 20, 10 * H / 20, 5 * H / 48, 10 * H / 48)
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
