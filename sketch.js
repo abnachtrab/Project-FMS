@@ -648,11 +648,18 @@ function draw() {
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[parseInt(gameState.slice(-1)) - 1].removeClass("locked")
+                if (!hasPlayed) levelComplete.play()
+                hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
-                levelComplete.play()
-                submit = false
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                    drawnPos = []
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
+                }, 2000)
             } else {
                 title.html("Try Again")
                 title.style("color", "red")
@@ -828,11 +835,18 @@ function draw() {
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[parseInt(gameState.slice(-1)) - 1].removeClass("locked")
+                if (!hasPlayed) levelComplete.play()
+                hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
-                levelComplete.play()
-                submit = false
+                setTimeout(() => {
+                    hasPlayed = false
+                    submit = false
+                    drawnPos = []
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                    transitioning = true
+                    gameState = "level select_"
+                }, 2000)
             } else {
                 title.html("Try Again")
                 title.style("color", "red")
