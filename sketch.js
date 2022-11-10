@@ -475,7 +475,7 @@ function draw() {
                     hasPlayed = false
                     submit = false
                     drawnPos = []
-                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                     transitioning = true
                     gameState = "level select_"
                 }, 2000)
@@ -571,7 +571,7 @@ function draw() {
                     hasPlayed = false
                     submit = false
                     drawnPos = []
-                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                     transitioning = true
                     gameState = "level select_"
                 }, 2000)
@@ -642,7 +642,7 @@ function draw() {
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                levelButtons[parseInt(gameState.slice(-1)) - 1].removeClass("locked")
                 title.html("Good Job!")
                 title.style("color", "green")
                 levelComplete.play()
@@ -729,7 +729,7 @@ function draw() {
                     hasPlayed = false
                     submit = false
                     drawnPos = []
-                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                     transitioning = true
                     gameState = "level select_"
                 }, 2000)
@@ -805,7 +805,7 @@ function draw() {
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                levelButtons[gameState.slice(-1) - 1].removeClass("locked")
+                levelButtons[parseInt(gameState.slice(-1)) - 1].removeClass("locked")
                 title.html("Good Job!")
                 title.style("color", "green")
                 levelComplete.play()
@@ -895,7 +895,7 @@ function draw() {
                     hasPlayed = false
                     submit = false
                     drawnPos = []
-                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                     transitioning = true
                     gameState = "level select_"
                 }, 2000)
@@ -988,7 +988,7 @@ function draw() {
                     hasPlayed = false
                     submit = false
                     drawnPos = []
-                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                     transitioning = true
                     gameState = "level select_"
                 }, 2000)
@@ -1083,7 +1083,7 @@ function draw() {
                     hasPlayed = false
                     submit = false
                     drawnPos = []
-                    levelButtons[gameState.slice(-1)].removeClass("locked")
+                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                     transitioning = true
                     gameState = "level select_"
                 }, 2000)
@@ -1102,7 +1102,7 @@ function draw() {
         }
     }
 
-
+    console.log(gameState)
 }
 
 
