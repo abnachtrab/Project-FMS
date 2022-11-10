@@ -472,12 +472,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
@@ -568,12 +570,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
@@ -653,12 +657,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 title.html("Try Again")
@@ -745,12 +751,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
@@ -840,12 +848,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 title.html("Try Again")
@@ -929,12 +939,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
@@ -1022,12 +1034,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
@@ -1117,12 +1131,14 @@ function draw() {
                 title.html("Good Job!")
                 title.style("color", "green")
                 setTimeout(() => {
-                    hasPlayed = false
-                    submit = false
-                    drawnPos = []
-                    levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
-                    transitioning = true
-                    gameState = "level select_"
+                    if (Number.isInteger(Number(gameState.slice(-1)))) {
+                        hasPlayed = false
+                        submit = false
+                        drawnPos = []
+                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
+                        transitioning = true
+                        gameState = "level select_"
+                    }
                 }, 2000)
             } else {
                 if (!hasPlayed) levelFail.play()
