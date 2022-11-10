@@ -419,8 +419,8 @@ function draw() {
         // TODO: ADD DRAW FUNCTION HERE
         noFill()
         strokeWeight(10)
-        stroke(0)
-        triangle((4*W/10), (7*H/10), (W/2), (4*H/10), (6*W/10), (7*H/10))
+        stroke(128)
+        triangle((4*W/10), (7*H/10)-H/16, (W/2), (4*H/10)-H/16, (6*W/10), (7*H/10)-H/16)
         // Count grey pixels
         let greyPixels = 0
         let greyPixelsLeft = 0
@@ -834,7 +834,7 @@ function draw() {
         while (x < W * (3 / 4)) {
             x += 1
             y = H / 2 - Math.cos(((6 * Math.PI) / (5 * W / 10)) * (x - W / 4)) * H / 8
-            if (x % 30*(W/250) < 15*(W/250)) circle(x, y, 10*(W/1000))
+            circle(x, y, 10*(W/1000))
         }
         // Count grey pixels
         let greyPixels = 0
