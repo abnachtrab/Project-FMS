@@ -502,32 +502,15 @@ function draw() {
         strokeWeight(3)
         rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
-        strokeWeight(0)
-        fill(128)
 
         let xCenter = W/2
         let yCenter = H/2
-        let x = -100
-        let y = 0
+        let radius = W/9
 
-        while (x <= 100) {
+        stroke(128)
+        strokeWeight(10)
+        circle(xCenter, yCenter, radius)
 
-            y = Math.sqrt(10000-x**2)
-
-            //while in the middle %50 of circle
-            if ((x < 25 || x > 75) && (y % 30 < 15)) {
-                if(!(x < 10 && x > -10)) {
-                    circle(x + xCenter, y + yCenter, 10)
-                    circle(x + xCenter, -y + yCenter, 10)
-                }
-            }
-            //while in the outer %50 percentage of the circle
-            if ((x > 25 && x < 75) && (x % 30 < 15)) {
-                circle(x + xCenter, y + yCenter, 10)
-                circle(x + xCenter, -y + yCenter, 10)
-            }
-            x += 0.1
-        }
 
         // Count grey pixels
         let greyPixels = 0
@@ -568,27 +551,9 @@ function draw() {
 
             let xCenter = W/2
             let yCenter = H/2
-            let x = -100
-            let y = 0
+            let radius = W/9
 
-            while (x <= 100) {
-
-                y = Math.sqrt(10000-x**2)
-
-                //while in the middle %50 of circle
-                if ((x < 25 || x > 75) && (y % 30 < 15)) {
-                    if(!(x < 10 && x > -10)) {
-                        circle(x + xCenter, y + yCenter, 10)
-                        circle(x + xCenter, -y + yCenter, 10)
-                    }
-                }
-                //while in the outer %50 percentage of the circle
-                if ((x > 25 && x < 75) && (x % 30 < 15)) {
-                    circle(x + xCenter, y + yCenter, 10)
-                    circle(x + xCenter, -y + yCenter, 10)
-                }
-                x += 0.1
-            }
+            circle(xCenter, yCenter, radius)
 
             updatePixels()
             let pixels_over = 0
