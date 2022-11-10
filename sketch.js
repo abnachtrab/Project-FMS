@@ -693,15 +693,31 @@ function draw() {
         // Draw the line to be traced
         strokeWeight(0)
         fill(128)
-        // TODO: ADD DRAW FUNCTION HERE
 
         let xCenter = W/2
         let yCenter = H/2
-        noFill()
-        strokeWeight(5)
-        color(0)
 
-        square(xCenter - ((1/8) * xCenter), yCenter - ((1/8) * yCenter), 100)
+        fill(0,0,0,0)
+        stroke(128)
+        strokeWeight(8)
+
+        //House Square
+        let houseLength = W/7
+        square(xCenter - (houseLength/2), yCenter - (houseLength/4), houseLength)
+
+        //Door Rectangle
+        let doorLength = houseLength/4
+        let doorHeight = houseLength/2
+        rect(xCenter - (3 * houseLength/8), yCenter + (houseLength/4), doorLength, doorHeight)
+
+        //Window Circle
+        circle(xCenter + (houseLength/4), yCenter + (doorHeight/2), doorLength)
+
+        //Roof Triangle
+        let roofLength = W/5
+        let roofHeight = W/15
+        let topOfHouse = yCenter - (houseLength/4)
+        triangle(xCenter - (roofLength/2), topOfHouse, xCenter + (roofLength/2), topOfHouse, xCenter, topOfHouse - roofHeight)
 
         // Count grey pixels
         let greyPixels = 0
@@ -739,13 +755,33 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            // TODO: ADD DRAW FUNCTION
-            circle(W / 2, 3 * H / 10, 5 * H / 48) // head
-            line(W / 2, 29 * H / 80, W / 2, 6 * H / 10) // torso
-            line(W / 2, 6 * H / 10, 9 * W / 20, 8 * H / 10) // left leg
-            line(W / 2, 6 * H / 10, 11 * W / 20, 8 * H / 10) // right leg
-            line(W / 2, H / 2, 2 * W / 5, 2 * H / 5) // left arm
-            line(W / 2, H / 2, 3 * W / 5, 2 * H / 5) // right arm
+
+            let xCenter = W/2
+            let yCenter = H/2
+
+            fill(0,0,0,0)
+            stroke(128)
+            strokeWeight(8)
+
+            //House Square
+            let houseLength = W/7
+            square(xCenter - (houseLength/2), yCenter - (houseLength/4), houseLength)
+
+            //Door Rectangle
+            let doorLength = houseLength/4
+            let doorHeight = houseLength/2
+            rect(xCenter - (3 * houseLength/8), yCenter + (houseLength/4), doorLength, doorHeight)
+
+            //Window Circle
+            circle(xCenter + (houseLength/4), yCenter + (doorHeight/2), doorLength)
+
+            //Roof Triangle
+            let roofLength = W/5
+            let roofHeight = W/15
+            let topOfHouse = yCenter - (houseLength/4)
+            triangle(xCenter - (roofLength/2), topOfHouse, xCenter + (roofLength/2), topOfHouse, xCenter, topOfHouse - roofHeight)
+
+
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
