@@ -66,6 +66,7 @@ function setup() {
     frameRate(240)
     // Fullscreen button
     fs = createButton("&#x26F6;")
+    fs.style("z-index", "100")
     fs.position(W - 35, -5)
     fs.mousePressed(() => {
         fullscreen(!fullscreen())
@@ -95,9 +96,11 @@ function setup() {
     backgroundDesign = loadImage("assets/images/design-bg.png")
     // Create Title
     title = createElement("h1", "Learn2Draw")
-    title.size(W, H / 4)
-    title.position(0, -W / 16)
-    title.style("text-align", "center")
+    title.size(W, H / 16)
+    title.position(0, 0)
+    title.style("display", "flex")
+    title.style("align-items", "center")
+    title.style("justify-content", "center")
     title.style("font-size", W / 8 + "px")
     title.style("color", "#FF8C00")
     // Create start button
@@ -228,7 +231,7 @@ function draw() {
         resizeCanvas(W, H)
         document.getElementById("transition").style.width = (W + "px")
         document.getElementById("transition").style.height = (H + "px")
-        title.size(W, H / 4)
+        title.size(W, H/16)
         title.style("font-size", W / 8 + "px")
         startButton.size(W / 4, H / 8)
         startButton.position(W / 2 - W / 8, H / 2 - H / 8)
@@ -248,7 +251,7 @@ function draw() {
         volumeSliderCounter.position(W / 2 + W / 12, H / 3 - H / 24)
         volumeSliderCounter.style("font-size", W / 32 + "px")
         for (let i = 0; i < levelCount; i++) {
-            levelButtons[i].size(W / 4 / H / 8)
+            levelButtons[i].size(W / 4 , H / 8)
             levelButtons[i].position(
                 W / 2 - (35 * W / 128) + (i % 2) * (W / 4 + W / 32),
                 H / 2 - H / 5 + Math.floor(i / 2) * H / 6
