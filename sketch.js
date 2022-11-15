@@ -421,7 +421,6 @@ function draw() {
         // Draw the line to be traced
         strokeWeight(0)
         fill(128)
-        // TODO: ADD DRAW FUNCTION HERE
         noFill()
         strokeWeight(10)
         stroke(128)
@@ -462,7 +461,6 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            // TODO: ADD DRAW FUNCTION
             triangle((4*W/10), (7*H/10), (W/2), (4*H/10), (6*W/10), (7*H/10))
             updatePixels()
             let pixels_over = 0
@@ -608,7 +606,6 @@ function draw() {
         rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
         fill(128)
-        // TODO: ADD DRAW FUNCTION HERE
         noFill()
         strokeWeight(10)
         stroke(128)
@@ -639,6 +636,9 @@ function draw() {
             })
         } else {
             submitButton.hide()
+            drawnPos.forEach((i) => {
+                circle(i[0], i[1], 30)
+            })
             // Calculate accuracy
             greyPixelsLeft = 0
             loadPixels()
@@ -648,19 +648,23 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            // TODO: ADD DRAW FUNCTION
             circle(W / 2, 7 * H / 20, 5 * H / 48) // head
             line(W / 2, 8 * H / 20, W / 2, 6 * H / 10) // torso
             line(W / 2, 6 * H / 10, 18 * W / 40, 29 * H / 40) // left leg
             line(W / 2, 6 * H / 10, 11 * W / 20, 29 * H / 40) // right leg
             line(W / 2, H / 2, 9 * W / 20, 9 * H / 20) // left arm
             line(W / 2, H / 2, 11 * W / 20, 9 * H / 20) // right arm
+            stroke(0)
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
                 if (pixels[i] === 250 && pixels[i + 1] === 250 && pixels[i + 2] === 250) pixels_over++
             }
             accuracy -= pixels_over / greyPixels
+            console.log(accuracy)
+            console.log(pixels_over)
+            console.log(greyPixels)
+            console.log(greyPixelsLeft)
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
@@ -831,7 +835,6 @@ function draw() {
         rect(W/4-W/8, H/2-H/4, 3*W/4, H/2)
         // Draw the line to be traced
         fill(128)
-        // TODO: ADD DRAW FUNCTION HERE
         noFill()
         strokeWeight(10)
         stroke(128)
@@ -879,7 +882,6 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            // TODO: ADD DRAW FUNCTION
             circle(2 * W / 5, 12 * H / 20, 10 * H / 48) // back wheel
             circle(3 * W / 5, 12 * H / 20, 10 * H / 48) // front wheel
             line(2 * W / 5, 12 * H / 20, 9 * W / 20, 9 * H / 20) // back axle
