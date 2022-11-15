@@ -487,8 +487,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -501,8 +499,6 @@ function draw() {
             } else {
                 if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Try Again")
-                title.style("color", "red")
                 // Wait 2 seconds and then clear
                 setTimeout(() => {
                     hasPlayed = false
@@ -585,8 +581,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -599,8 +593,6 @@ function draw() {
             } else {
                 if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Try Again")
-                title.style("color", "red")
                 // Wait 2 seconds and then clear
                 setTimeout(() => {
                     hasPlayed = false
@@ -684,8 +676,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -696,8 +686,6 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                title.html("Try Again")
-                title.style("color", "red")
                 levelFail.play(0, 1, vol/100)
                 submit = false
             }
@@ -814,8 +802,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -828,8 +814,6 @@ function draw() {
             } else {
                 if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Try Again")
-                title.style("color", "red")
                 // Wait 2 seconds and then clear
                 setTimeout(() => {
                     hasPlayed = false
@@ -921,8 +905,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -933,8 +915,6 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                title.html("Try Again")
-                title.style("color", "red")
                 levelFail.play(0, 1, vol/100)
                 submit = false
             }
@@ -1012,8 +992,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -1026,8 +1004,6 @@ function draw() {
             } else {
                 if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Try Again")
-                title.style("color", "red")
                 // Wait 2 seconds and then clear
                 setTimeout(() => {
                     hasPlayed = false
@@ -1107,8 +1083,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -1121,8 +1095,6 @@ function draw() {
             } else {
                 if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Try Again")
-                title.style("color", "red")
                 // Wait 2 seconds and then clear
                 setTimeout(() => {
                     hasPlayed = false
@@ -1207,8 +1179,6 @@ function draw() {
                 submit = false
                 if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Good Job!")
-                title.style("color", "green")
                 setTimeout(() => {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
@@ -1221,8 +1191,6 @@ function draw() {
             } else {
                 if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
-                title.html("Try Again")
-                title.style("color", "red")
                 // Wait 2 seconds and then clear
                 setTimeout(() => {
                     hasPlayed = false
