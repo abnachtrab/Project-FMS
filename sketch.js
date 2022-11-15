@@ -108,8 +108,10 @@ function setup() {
     startButton.size(W / 4, H / 8)
     startButton.position(W / 2 - W / 8, H / 2 - H / 8)
     startButton.mousePressed(() => {
-        transitioning = true
-        gameState = "level select_"
+        if(!transitioning) {
+            transitioning = true
+            gameState = "level select_"
+        }
     })
     startButton.style("font-size", W / 16 + "px")
     startButton.style("font-family", "TheFountainofWishes")
@@ -118,8 +120,10 @@ function setup() {
     optionsButton.size(W / 4, H / 8)
     optionsButton.position(W / 2 - W / 8, H / 2 + H / 16)
     optionsButton.mousePressed(() => {
-        transitioning = true
-        gameState = "options_"
+        if(!transitioning) {
+            transitioning = true
+            gameState = "options_"
+        }
     })
     optionsButton.style("font-size", W / 16 + "px")
     optionsButton.style("font-family", "TheFountainofWishes")
@@ -128,9 +132,11 @@ function setup() {
     mainMenuButton.size(W / 6.5, H / 16)
     mainMenuButton.position(-2, -2)
     mainMenuButton.mousePressed(() => {
-        transitioning = true
-        gameState = "main menu_"
-        drawnPos = []
+        if (!transitioning) {
+            transitioning = true
+            gameState = "main menu_"
+            drawnPos = []
+        }
     })
     mainMenuButton.style("font-size", W / 28 + "px")
     mainMenuButton.style("font-family", "TheFountainofWishes")
@@ -177,8 +183,10 @@ function setup() {
             H / 2 - H / 5 + Math.floor(i / 2) * H / 6
         )
         levelButtons[i].mousePressed(() => {
-            transitioning = true
-            gameState = "level " + (i + 1) + "_"
+            if(!transitioning) {
+                transitioning = true
+                gameState = "level " + (i + 1) + "_"
+            }
         })
         levelButtons[i].style("font-size", W / 16 + "px")
         levelButtons[i].style("font-family", "TheFountainofWishes")
@@ -188,7 +196,9 @@ function setup() {
     }
     clearButton = createButton("Clear")
     clearButton.mousePressed(() => {
-        drawnPos = []
+        if (!transitioning) {
+            drawnPos = []
+        }
     })
     clearButton.mouseOver(() => {
         clearButton.style("background-color", "rgba(192, 192, 192, 1)")
@@ -207,7 +217,9 @@ function setup() {
     clearButton.style("font-size", W / 16 + "px")
     submitButton = createButton("Submit")
     submitButton.mousePressed(() => {
-        submit = true
+        if (!transitioning) {
+            submit = true
+        }
     })
     submitButton.mouseOver(() => {
         submitButton.style("background-color", "rgba(192, 192, 192, 1)")
@@ -337,8 +349,10 @@ function draw() {
                 levelButtons[i].style("background-color", "rgba(255, 255, 255, 1)")
                 levelButtons[i].style("color", "rgba(0, 0, 0, 1)")
                 levelButtons[i].mousePressed(() => {
-                    transitioning = true
-                    gameState = "level " + (i + 1) + "_"
+                    if(!transitioning) {
+                        transitioning = true
+                        gameState = "level " + (i + 1) + "_"
+                    }
                 })
             }
             levelButtons[i].show()
