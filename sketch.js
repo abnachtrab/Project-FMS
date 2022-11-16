@@ -469,7 +469,7 @@ function draw() {
             accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -484,7 +484,7 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                if (!hasPlayed) levelFail.play()
+                if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
@@ -567,7 +567,7 @@ function draw() {
             accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -582,7 +582,7 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                if (!hasPlayed) levelFail.play()
+                if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
@@ -660,7 +660,7 @@ function draw() {
             accuracy -= pixels_over / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -677,7 +677,7 @@ function draw() {
             } else {
                 title.html("Try Again")
                 title.style("color", "red")
-                levelFail.play()
+                levelFail.play(0, 1, vol/100)
                 submit = false
             }
         }
@@ -790,7 +790,7 @@ function draw() {
             accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -805,7 +805,7 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                if (!hasPlayed) levelFail.play()
+                if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
@@ -899,7 +899,7 @@ function draw() {
             console.log(greyPixels)
             console.log(greyPixelsLeft)
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -916,7 +916,7 @@ function draw() {
             } else {
                 title.html("Try Again")
                 title.style("color", "red")
-                levelFail.play()
+                levelFail.play(0, 1, vol/100)
                 submit = false
             }
         }
@@ -990,7 +990,7 @@ function draw() {
             accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -1005,7 +1005,7 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                if (!hasPlayed) levelFail.play()
+                if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
@@ -1085,7 +1085,7 @@ function draw() {
             accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -1100,7 +1100,7 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                if (!hasPlayed) levelFail.play()
+                if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
@@ -1124,13 +1124,16 @@ function draw() {
         // Draw the line to be traced
         strokeWeight(0)
         fill(128)
-        ////////
-        ////////
-        ////////
-        // Draw formula here
-        ////////
-        ////////
-        ////////
+
+        //let xCenter = W/2
+        //let yCenter = H/2
+
+        fill(0,0,0,0)
+        stroke(128)
+        strokeWeight(8)
+
+        ellipse()
+
         // Count grey pixels
         let greyPixels = 0
         let greyPixelsLeft = 0
@@ -1182,7 +1185,7 @@ function draw() {
             accuracy -= (pixels_over/30) / greyPixels
             // If accuracy is good enough, unlock next level, congratulate the user, and return to the level select screen
             if (accuracy >= 0.7) {
-                if (!hasPlayed) levelComplete.play()
+                if (!hasPlayed) levelComplete.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Good Job!")
                 title.style("color", "green")
@@ -1197,7 +1200,7 @@ function draw() {
                     }
                 }, 2000)
             } else {
-                if (!hasPlayed) levelFail.play()
+                if (!hasPlayed) levelFail.play(0, 1, vol/100)
                 hasPlayed = true
                 title.html("Try Again")
                 title.style("color", "red")
