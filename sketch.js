@@ -1116,14 +1116,23 @@ function draw() {
         strokeWeight(0)
         fill(128)
 
-        //let xCenter = W/2
-        //let yCenter = H/2
+        let xCenter = W/2
+        let yCenter = H/2
 
         fill(0,0,0,0)
         stroke(128)
         strokeWeight(8)
 
-        ellipse()
+        let appleLength = W/7
+        let appleHeight = H/3.5
+        let appleCenterY = yCenter + (H/20)
+
+        //arc apple
+        arc(xCenter + (appleLength/3.7), appleCenterY, appleLength, appleHeight, (4 * 3.14)/3, (2 * 3.14)/3)
+        arc(xCenter - (appleLength/3.7), appleCenterY, appleLength, appleHeight, 3.14/3, (5 * 3.14)/3)
+
+        //line apple stem
+        line(xCenter, appleCenterY - (appleHeight/2.2), xCenter + (W/100), yCenter - (H/6.5))
 
         // Count grey pixels
         let greyPixels = 0
@@ -1161,13 +1170,25 @@ function draw() {
             let accuracy = (greyPixels - greyPixelsLeft) / greyPixels
             // Check how much user went over
             fill(255, 0, 255)
-            ////////
-            ////////
-            ////////
-            // Draw formula here
-            ////////
-            ////////
-            ////////
+
+            let xCenter = W/2
+            let yCenter = H/2
+
+            fill(0,0,0,0)
+            stroke(128)
+            strokeWeight(8)
+
+            let appleLength = W/7
+            let appleHeight = H/3.5
+            let appleCenterY = yCenter + (H/20)
+
+            //arc apple
+            arc(xCenter + (appleLength/3.7), appleCenterY, appleLength, appleHeight, (4 * 3.14)/3, (2 * 3.14)/3)
+            arc(xCenter - (appleLength/3.7), appleCenterY, appleLength, appleHeight, 3.14/3, (5 * 3.14)/3)
+
+            //line apple stem
+            line(xCenter, appleCenterY - (appleHeight/2.2), xCenter + (W/100), yCenter - (H/6.5))
+
             updatePixels()
             let pixels_over = 0
             for (let i = 0; i < pixels.length; i += 4) {
