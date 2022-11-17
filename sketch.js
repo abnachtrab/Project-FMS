@@ -1204,7 +1204,6 @@ function draw() {
                     if (Number.isInteger(Number(gameState.slice(-1)))) {
                         hasPlayed = false
                         drawnPos = []
-                        levelButtons[parseInt(gameState.slice(-1))].removeClass("locked")
                         transitioning = true
                         gameState = "level select_"
                     }
